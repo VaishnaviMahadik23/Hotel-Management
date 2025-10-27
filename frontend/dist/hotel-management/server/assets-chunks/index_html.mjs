@@ -1,0 +1,12 @@
+export default `<!DOCTYPE html><html lang="en" data-beasties-container><head>
+  <meta charset="utf-8">
+  <title>HotelManagement</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="stylesheet" href="styles-5INURTSO.css"><style ng-app-id="ng">.app-container[_ngcontent-ng-c3984273398]{text-align:center;margin-top:50px}nav[_ngcontent-ng-c3984273398]{margin:20px 0}button[_ngcontent-ng-c3984273398]{background-color:#2da0a8;color:#fff;padding:10px 20px;margin:0 10px;border:none;border-radius:6px;cursor:pointer;font-weight:600}button[_ngcontent-ng-c3984273398]:hover{background-color:#1e7f81}</style></head>
+<body><!--nghm-->
+  <app-root ng-version="19.2.15" _nghost-ng-c3984273398 ngh="0" ng-server-context="ssg"><router-outlet _ngcontent-ng-c3984273398></router-outlet><!----></app-root>
+<script src="polyfills-B6TNHZQ6.js" type="module"></script><script src="main-CILNOIN7.js" type="module"></script>
+
+<script id="ng-state" type="application/json">{"__nghData__":[{"c":{"0":[]}}]}</script></body></html>`;
