@@ -6,33 +6,18 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
+  getToken() {
+    throw new Error('Method not implemented.');
+  }
+  private baseUrl = 'http://localhost:3000/api'; // change if your backend URL is different
 
-  private baseUrl = 'http://localhost:3000/api'; // backend base URL
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
-
-  // Signup user
-  signup(userData: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/signup`, userData);
+  signup(name: string, email: string, password: string): Observable<any> {
+    return this.http.post(`${this.baseUrl}/signup`, { name, email, password });
   }
 
-  // Signin user
-  signin(credentials: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/signin`, credentials);
-  }
-
-  // Store token in local storage
-  storeToken(token: string): void {
-    localStorage.setItem('token', token);
-  }
-
-  // Get token from local storage
-  getToken(): string | null {
-    return localStorage.getItem('token');
-  }
-
-  // Clear token (logout)
-  logout(): void {
-    localStorage.removeItem('token');
+  signin(email: string, password: string): Observable<any> {
+    return this.http.post(`${this.baseUrl}/signin`, { email, password });
   }
 }

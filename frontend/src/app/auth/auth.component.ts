@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-auth',
@@ -18,16 +19,39 @@ export class AuthComponent {
   emailSignin: string = '';
   passwordSignin: string = '';
 
+  constructor(private authService: AuthService) {}
+
   toggle() {
     const container = document.getElementById('container');
     container?.classList.toggle('active');
   }
 
   onSignup() {
-    console.log('Sign Up:', this.name, this.emailSignup, this.passwordSignup);
+    this.authService.signup(this.name, this.emailSignup, this.passwordSignup).subscribe({
+      next: (res) => {
+        console.log('Signup successful:', res);
+        alert('Signup successful!');
+      },
+      error: (err) => {
+        console.error('Signup error:', err);
+        alert('Signup failed! Check console for details.');
+      }
+    });
   }
 
   onSignin() {
-    console.log('Sign In:', this.emailSignin, this.passwordSignin);
+    this.authService.signin(this.emailSignin, this.passwordSignin).subscribe({
+      next: (res) => {
+        console.log('Signin successful:', res);
+        if (res.token) {
+          localStorage.setItem('token', res.token);
+        }
+        alert('Signin successful!');
+      },
+      error: (err) => {
+        console.error('Signin error:', err);
+        alert('Signin failed! Check console for details.');
+      }
+    });
   }
 }
