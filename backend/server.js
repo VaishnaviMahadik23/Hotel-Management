@@ -10,19 +10,25 @@ const authRoutes = require('./routes/auth');
 
 const app = express();
 
-// Middleware
+// Middleware to log requests
 app.use((req, res, next) => {
   console.log('Incoming Request → URL:', req.url, 'Method:', req.method);
   next();
 });
 
-app.use(cors());
-app.use(express.json()); // modern way to parse JSON
+// CORS
+app.use(cors({ origin: 'http://localhost:4200' }));
+
+// JSON parser
+app.use(express.json());
 
 // MongoDB connection
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log('✅ MongoDB Connected'))
-  .catch(err => console.error('❌ MongoDB Connection Error:', err));
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+.then(() => console.log('✅ MongoDB Connected'))
+.catch(err => console.error('❌ MongoDB Connection Error:', err));
 
 // Test route
 app.get('/', (req, res) => res.send('Server is working!'));
@@ -31,12 +37,12 @@ app.get('/', (req, res) => res.send('Server is working!'));
 app.get('/api/dashboard', authMiddleware, (req, res) => {
   res.json({
     message: 'Welcome to your dashboard!',
-    user: req.user  // contains id and email from JWT
+    user: req.user
   });
 });
 
-// Routes
-app.use('/api', authRoutes); // ✅ Only one instance — no duplicates!
+// Auth routes
+app.use('/api', authRoutes);
 
 // Start server
 const PORT = process.env.PORT || 3000;

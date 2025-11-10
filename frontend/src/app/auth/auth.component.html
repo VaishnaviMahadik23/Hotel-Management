@@ -1,3 +1,8 @@
+<!-- Feedback Message -->
+<div *ngIf="message" [ngClass]="{'success-msg': messageType === 'success', 'error-msg': messageType === 'error'}">
+  {{ message }}
+</div>
+
 <div class="container" id="container">
   <!-- Sign Up Form -->
   <div class="form-container sign-up">
